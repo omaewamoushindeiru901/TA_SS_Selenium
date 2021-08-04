@@ -1,6 +1,10 @@
+import dataProvider.DataProviders;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageObgects.HomePage;
 import pageObgects.SignInPage;
+
+import javax.sql.DataSource;
 
 public class ContinueButtonTests extends BaseTest{
     @Test(description = "Check if continue button is enabled when user inputs valid email")
@@ -13,22 +17,30 @@ public class ContinueButtonTests extends BaseTest{
 
     }
 
-    @Test(description = "Verify email by 'boundary values' criteria")
-    public void verifyButtonByBoundaries(){
+    @Test(dataProvider = "validEmails",dataProviderClass = DataProviders.class,description = "Verify email by 'boundary values' criteria")
+    public void verifyButtonByBoundaries(String description,String value){
         new HomePage()
                 .proceedToHomePage()
                 .clickSignInButton()
-                .enterEmail("123456789012345678901234567890123456789012345678901234@gmail.com")
+                .enterEmail(value)
                 .verifyButtonIsEnabled();
+    }
+
+    @Test(dataProvider = "nonValidEmails",dataProviderClass = DataProviders.class,description = "Check if button disabled when email is invalid")
+    public void verifyButtonHardAssert(String description,String value){
         new HomePage()
                 .proceedToHomePage()
                 .clickSignInButton()
-                .enterEmail("123456789012345678901234567890123456789012345678901234@gmail.ua")
-                .verifyButtonIsEnabled();
+                .enterEmail(value)
+                .verifyButtonIsDisabled();
+    }
+
+    @Test(dataProvider = "nonValidEmails",dataProviderClass = DataProviders.class,description = "Check if button disabled when email is invalid")
+    public void verifyButtonSoftAssert(String description,String value){
         new HomePage()
                 .proceedToHomePage()
                 .clickSignInButton()
-                .enterEmail("qqqq@gmail.eeeeeeeeee")
-                .verifyButtonIsEnabled();
+                .enterEmail(value)
+                .verifyButtonIsDisabledSoftAssert();
     }
 }

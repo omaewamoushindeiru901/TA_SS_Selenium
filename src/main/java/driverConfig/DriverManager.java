@@ -35,7 +35,7 @@ public class DriverManager {
         driver.manage().timeouts().implicitlyWait(ConstantValues.IMPLICITLY_WAIT_VALUE.getValue(), TimeUnit.SECONDS);
     }
 
-    public WebDriver getDriver(){
+    public static WebDriver getDriver(){
         return driver;
     }
 

@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public abstract class AbstractPage {
-    DriverManager driverManager=new DriverManager();
 
-    private  final WebDriverWait wait =  new WebDriverWait(driverManager.getDriver(), 10);
+    private final WebDriverWait wait =  new WebDriverWait(DriverManager.getDriver(), 10);
 
     protected static final Logger LOG= Logger.getLogger(AbstractPage.class.getName());
 
@@ -20,7 +19,7 @@ public abstract class AbstractPage {
     }
 
     void proceedToPage(final String url) {
-        driverManager.getDriver().get(url);
+        DriverManager.getDriver().get(url);
     }
 
     WebElement getElement(By locator) {
@@ -28,7 +27,7 @@ public abstract class AbstractPage {
     }
 
     List<WebElement> getElements(By locator) {
-        return driverManager.getDriver().findElements(locator);
+        return DriverManager.getDriver().findElements(locator);
     }
 
 

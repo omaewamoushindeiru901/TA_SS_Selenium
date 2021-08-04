@@ -6,9 +6,9 @@ import org.testng.Assert;
 
 public class HomePage extends AbstractPage {
     private final By signInButton = By.className("header-auth__signin");
-
     private final By topRightCornerUserNameElement = By.className("user-info__name");
-
+    private final By trainingListLinkButton = By.xpath("//ul[@class='main-nav__list']//a[contains(@class,'training')]");
+    private final By blogButton = By.xpath("//ul[@class='main-nav__list']//li//a[contains(text(),'Blog')]");
 
 
     public SignInPage clickSignInButton() {
@@ -35,6 +35,18 @@ public class HomePage extends AbstractPage {
 
     public void verifyUserIsLoggedIn(){
         Assert.assertTrue(isUserNameDisplayed(),"User is not logged in");
+    }
+
+    public TrainingListPage clickTrainingListLinkButton(){
+        getElement(trainingListLinkButton).click();
+        LOG.info("Training list link button clicked.");
+        return new TrainingListPage();
+    }
+
+    public BlogPage clickBlogPageButton(){
+        getElement(blogButton).click();
+        LOG.info("Blog button clicked");
+        return new BlogPage();
     }
 
 

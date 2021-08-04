@@ -2,6 +2,7 @@ package pageObgects;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class SignInPage extends AbstractPage {
 
@@ -17,7 +18,7 @@ public class SignInPage extends AbstractPage {
         return this;
     }
 
-    public boolean isEmailInBoundaries(String email){
+   /* public boolean isEmailInBoundaries(String email){
         return email.length() > 0 && email.length() <= 64;
     }
 
@@ -39,11 +40,20 @@ public class SignInPage extends AbstractPage {
 
     public boolean verifyEmailIsValid(String email){
         return isEmailInBoundaries(email) && isDomainInBoundaries(email) && isAtSymbolFirst(email)
-                && isAtSymbolPresent(email);
-    }
+                && isAtSymbolPresent(email);}*/
 
     public void verifyButtonIsEnabled(){
-        Assert.assertNull(getElement(continueButton).getAttribute("disabled"), "Continue button is disabled");
+        Assert.assertTrue(getElement(continueButton).isEnabled());
+    }
+
+    public void verifyButtonIsDisabled(){
+        Assert.assertFalse(getElement(continueButton).isEnabled());
+    }
+
+    public void verifyButtonIsDisabledSoftAssert(){
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertFalse(getElement(continueButton).isEnabled());
+        softAssert.assertAll();
     }
 
 
