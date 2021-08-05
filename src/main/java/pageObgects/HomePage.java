@@ -1,8 +1,12 @@
 package pageObgects;
 
 import consts.BusinessConfig;
+import dataProvider.DataProviders;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 public class HomePage extends AbstractPage {
     private final By signInButton = By.className("header-auth__signin");
@@ -49,5 +53,16 @@ public class HomePage extends AbstractPage {
         return new BlogPage();
     }
 
+
+    public HomePage signIn(String email, String password){
+        new HomePage()
+                .proceedToHomePage()
+                .clickSignInButton()
+                .enterEmail(email)
+                .clickContinueButton()
+                .enterPassword(password)
+                .clickSignInButton();
+        return this;
+    }
 
 }

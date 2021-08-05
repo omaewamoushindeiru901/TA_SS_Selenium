@@ -1,44 +1,36 @@
+import consts.Locations;
+import consts.Skills;
+import dataProvider.DataProviders;
 import org.testng.annotations.Test;
 import pageObgects.HomePage;
 import pageObgects.TrainingListPage;
 
-import java.util.HashMap;
-
 public class TrainingListPageTests extends BaseTest{
-    @Test(description = "Verify ‘Trainings’ search works properly with searching in ‘Skills'")
-    public void verifyTrainingsSearchSkills(){
+    @Test(dataProvider = "validCredentials",dataProviderClass = DataProviders.class,description = "Verify ‘Trainings’ search works properly with searching in ‘Skills'")
+    public void verifyTrainingsSearchSkills(String email, String password){
         new HomePage()
-                .proceedToHomePage()
-                .clickSignInButton()
-                .enterEmail("ivanhorintest@gmail.com")
-                .clickContinueButton()
-                .enterPassword("ivanhorintestPassword")
-                .clickSignInButton()
+                .signIn(email, password)
                 .clickTrainingListLinkButton()
                 .uncheckSelectedLocations()
                 .clickOnSearchByButton()
                 .clickOnBySkillsButton()
-                .checkJava()
-                .verifyJavaCourses()
-                .uncheckJava()
+                .checkSkill(Skills.JAVA)
+                .verifyPresentCourses(Skills.JAVA);
+        new TrainingListPage()
+                .uncheckSkill()
                 .clickOnSearchByButton()
-                .checkRuby()
+                .checkSkill(Skills.RUBY)
                 .verifyNoTrainingsMessageDisplayed();
     }
 
-    @Test(description = "Verify ‘Trainings’ search works properly with searching in ‘Locations’.")
-    public void verifyTrainingSearchLocations(){
+    @Test(dataProvider = "validCredentials",dataProviderClass = DataProviders.class,description = "Verify ‘Trainings’ search works properly with searching in ‘Locations’.")
+    public void verifyTrainingSearchLocations(String email, String password){
         new HomePage()
-                .proceedToHomePage()
-                .clickSignInButton()
-                .enterEmail("ivanhorintest@gmail.com")
-                .clickContinueButton()
-                .enterPassword("ivanhorintestPassword")
-                .clickSignInButton()
+                .signIn(email, password)
                 .clickTrainingListLinkButton()
                 .uncheckSelectedLocations()
                 .clickOnSearchByButton()
-                .checkLviv()
-                .verifyLocations();
+                .checkLocation(Locations.LVIV)
+                .verifyLocations(Locations.LVIV);
     }
 }

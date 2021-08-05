@@ -3,7 +3,7 @@ package consts;
 public enum ConstantValues {
     IMPLICITLY_WAIT_VALUE(10);
 
-    private int value;
+    private final int value;
     ConstantValues(int value){
         this.value=value;
     }
@@ -12,9 +12,6 @@ public enum ConstantValues {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
 }
 
 

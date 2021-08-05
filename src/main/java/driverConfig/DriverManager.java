@@ -11,9 +11,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class DriverManager {
-    protected static final Logger LOG= Logger.getLogger(DriverManager.class.getName());
+    protected static Logger LOG= Logger.getLogger(DriverManager.class.getName());
      private static WebDriver driver;
-    WebDriver getWebDriver(String browserName){
+
+    static WebDriver getWebDriver(String browserName){
         switch (browserName){
             case "CHROME":
                 return new ChromeDriver();
@@ -26,8 +27,7 @@ public class DriverManager {
         }
     }
 
-
-    public void createDriver(String browserName){
+    public static void createDriver(String browserName){
         DriverConfigs browser=DriverConfigs.valueOf(browserName);
         System.setProperty(browser.getName(), browser.getPath());
         driver = getWebDriver(browserName);

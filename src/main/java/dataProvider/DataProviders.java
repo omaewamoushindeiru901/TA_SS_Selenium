@@ -22,4 +22,18 @@ public class DataProviders {
                 {"9 characters in domain .","1234@gmail.uaaaaaaaa"},
                 {"10 characters in domain .","1234@gmail.uaaaaaaaaa"}};
     }
+
+    @DataProvider(name="validCredentials")
+    public static Object[][] credentialsForSignIn(){
+        return new Object[][]{
+                {"ivanhorintest@gmail.com","ivanhorintestPassword"}
+        };
+    }
+
+    @DataProvider(name="invalidCredentials")
+    public static Object[][] invalidCredentialsForSignIn(){
+        return new Object[][]{
+                {"ivanhorintest@gmail.com","ivanhorintestPassworddd"}
+        };
+    }
 }

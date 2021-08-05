@@ -2,9 +2,7 @@ import dataProvider.DataProviders;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageObgects.HomePage;
-import pageObgects.SignInPage;
 
-import javax.sql.DataSource;
 
 public class ContinueButtonTests extends BaseTest{
     @Test(description = "Check if continue button is enabled when user inputs valid email")
